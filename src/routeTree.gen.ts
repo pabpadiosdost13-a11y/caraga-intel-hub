@@ -9,8 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RepositoryRouteImport } from './routes/repository'
+import { Route as PublicationsRouteImport } from './routes/publications'
+import { Route as ProblemsRouteImport } from './routes/problems'
+import { Route as PipelineRouteImport } from './routes/pipeline'
+import { Route as ImpactIndexRouteImport } from './routes/impact-index'
+import { Route as ImpactRouteImport } from './routes/impact'
+import { Route as CollaborationRouteImport } from './routes/collaboration'
 import { Route as IndexRouteImport } from './routes/index'
 
+const RepositoryRoute = RepositoryRouteImport.update({
+  id: '/repository',
+  path: '/repository',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicationsRoute = PublicationsRouteImport.update({
+  id: '/publications',
+  path: '/publications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProblemsRoute = ProblemsRouteImport.update({
+  id: '/problems',
+  path: '/problems',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PipelineRoute = PipelineRouteImport.update({
+  id: '/pipeline',
+  path: '/pipeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpactIndexRoute = ImpactIndexRouteImport.update({
+  id: '/impact-index',
+  path: '/impact-index',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpactRoute = ImpactRouteImport.update({
+  id: '/impact',
+  path: '/impact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollaborationRoute = CollaborationRouteImport.update({
+  id: '/collaboration',
+  path: '/collaboration',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +61,130 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/collaboration': typeof CollaborationRoute
+  '/impact': typeof ImpactRoute
+  '/impact-index': typeof ImpactIndexRoute
+  '/pipeline': typeof PipelineRoute
+  '/problems': typeof ProblemsRoute
+  '/publications': typeof PublicationsRoute
+  '/repository': typeof RepositoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/collaboration': typeof CollaborationRoute
+  '/impact': typeof ImpactRoute
+  '/impact-index': typeof ImpactIndexRoute
+  '/pipeline': typeof PipelineRoute
+  '/problems': typeof ProblemsRoute
+  '/publications': typeof PublicationsRoute
+  '/repository': typeof RepositoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/collaboration': typeof CollaborationRoute
+  '/impact': typeof ImpactRoute
+  '/impact-index': typeof ImpactIndexRoute
+  '/pipeline': typeof PipelineRoute
+  '/problems': typeof ProblemsRoute
+  '/publications': typeof PublicationsRoute
+  '/repository': typeof RepositoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/collaboration'
+    | '/impact'
+    | '/impact-index'
+    | '/pipeline'
+    | '/problems'
+    | '/publications'
+    | '/repository'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/collaboration'
+    | '/impact'
+    | '/impact-index'
+    | '/pipeline'
+    | '/problems'
+    | '/publications'
+    | '/repository'
+  id:
+    | '__root__'
+    | '/'
+    | '/collaboration'
+    | '/impact'
+    | '/impact-index'
+    | '/pipeline'
+    | '/problems'
+    | '/publications'
+    | '/repository'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CollaborationRoute: typeof CollaborationRoute
+  ImpactRoute: typeof ImpactRoute
+  ImpactIndexRoute: typeof ImpactIndexRoute
+  PipelineRoute: typeof PipelineRoute
+  ProblemsRoute: typeof ProblemsRoute
+  PublicationsRoute: typeof PublicationsRoute
+  RepositoryRoute: typeof RepositoryRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/repository': {
+      id: '/repository'
+      path: '/repository'
+      fullPath: '/repository'
+      preLoaderRoute: typeof RepositoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/publications': {
+      id: '/publications'
+      path: '/publications'
+      fullPath: '/publications'
+      preLoaderRoute: typeof PublicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/problems': {
+      id: '/problems'
+      path: '/problems'
+      fullPath: '/problems'
+      preLoaderRoute: typeof ProblemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pipeline': {
+      id: '/pipeline'
+      path: '/pipeline'
+      fullPath: '/pipeline'
+      preLoaderRoute: typeof PipelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impact-index': {
+      id: '/impact-index'
+      path: '/impact-index'
+      fullPath: '/impact-index'
+      preLoaderRoute: typeof ImpactIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impact': {
+      id: '/impact'
+      path: '/impact'
+      fullPath: '/impact'
+      preLoaderRoute: typeof ImpactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collaboration': {
+      id: '/collaboration'
+      path: '/collaboration'
+      fullPath: '/collaboration'
+      preLoaderRoute: typeof CollaborationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,7 +197,24 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CollaborationRoute: CollaborationRoute,
+  ImpactRoute: ImpactRoute,
+  ImpactIndexRoute: ImpactIndexRoute,
+  PipelineRoute: PipelineRoute,
+  ProblemsRoute: ProblemsRoute,
+  PublicationsRoute: PublicationsRoute,
+  RepositoryRoute: RepositoryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
