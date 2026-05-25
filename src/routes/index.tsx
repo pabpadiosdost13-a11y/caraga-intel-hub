@@ -70,7 +70,6 @@ function Page() {
           <>
             <span className="text-gradient">Caraga Research</span> Intelligence
           </>
-            as unknown as string
         }
         description="A live view of DOST-funded research, real-world impact, and collaboration across the Caraga region."
         actions={
