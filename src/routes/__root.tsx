@@ -72,14 +72,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "CRCIT — Caraga Research Collaboration & Impact Tracker" },
+      {
+        name: "description",
+        content:
+          "DOST Caraga's regional innovation intelligence platform — research repository, impact analytics, AI collaboration matcher, and tech transfer pipeline.",
+      },
+      { name: "author", content: "DOST Caraga" },
+      { property: "og:title", content: "CRCIT — Caraga Research Impact Tracker" },
+      {
+        property: "og:description",
+        content:
+          "Map the research-to-impact pipeline across Caraga: repositories, dashboards, AI matching, and tech transfer.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
