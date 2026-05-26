@@ -4,10 +4,8 @@ import {
   Database,
   BarChart3,
   Users2,
-  MessageSquareWarning,
-  BookOpen,
+  ClipboardCheck,
   GitBranch,
-  Trophy,
   Sparkles,
   Search,
   Bell,
@@ -16,14 +14,12 @@ import {
 import { type ReactNode } from "react";
 
 const nav = [
-  { to: "/", label: "Command Center", icon: LayoutDashboard },
+  { to: "/", label: "Dashboard & Analytics", icon: LayoutDashboard },
   { to: "/repository", label: "Research Repository", icon: Database },
-  { to: "/impact", label: "Impact Dashboard", icon: BarChart3 },
-  { to: "/collaboration", label: "AI Collaboration", icon: Users2 },
-  { to: "/problems", label: "Community Problems", icon: MessageSquareWarning },
-  { to: "/publications", label: "Publications", icon: BookOpen },
-  { to: "/pipeline", label: "Tech Transfer", icon: GitBranch },
-  { to: "/impact-index", label: "Impact Index", icon: Trophy },
+  { to: "/publications", label: "Output Tracker", icon: ClipboardCheck },
+  { to: "/impact", label: "Impact Intelligence", icon: BarChart3 },
+  { to: "/pipeline", label: "TRL & Transfer", icon: GitBranch },
+  { to: "/collaboration", label: "Research Network", icon: Users2 },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -38,7 +34,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <Sparkles className="h-5 w-5 text-primary-foreground" />
           </div>
           <div className="leading-tight">
-            <div className="text-sm font-semibold tracking-tight">CRCIT</div>
+            <div className="text-sm font-semibold tracking-tight">Caraga R&D Intel Hub</div>
             <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
               DOST Caraga
             </div>
@@ -78,13 +74,13 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="m-3 rounded-xl border border-sidebar-border bg-sidebar-accent/60 p-3">
           <div className="flex items-center gap-2 text-xs">
             <Sparkles className="h-3.5 w-3.5 text-primary" />
-            <span className="font-medium">AI Co-pilot</span>
+            <span className="font-medium">Insight Console</span>
           </div>
           <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
-            Ask anything about Caraga research, gaps, and opportunities.
+            Regional research, development, monitoring, collaboration, and impact intelligence.
           </p>
           <button className="mt-2 w-full rounded-md bg-gradient-primary px-2 py-1.5 text-[11px] font-medium text-primary-foreground">
-            Open Co-pilot
+            Open Console
           </button>
         </div>
       </aside>

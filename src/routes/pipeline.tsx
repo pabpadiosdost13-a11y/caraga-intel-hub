@@ -7,7 +7,7 @@ import { Rocket, FlaskConical, FlaskRound, ShieldCheck, Building2 } from "lucide
 export const Route = createFileRoute("/pipeline")({
   head: () => ({
     meta: [
-      { title: "Technology Transfer Pipeline — CRCIT" },
+      { title: "Technology Readiness & Transfer Pipeline - Caraga R&D Intel Hub" },
       {
         name: "description",
         content:
@@ -54,15 +54,15 @@ function Page() {
   return (
     <AppShell>
       <PageHeader
-        eyebrow="Tech Transfer"
-        title="Commercialization Pipeline"
+        eyebrow="Technology Readiness and Transfer"
+        title="Technology Readiness & Transfer Pipeline"
         description="From research to market — track TRL progression, IP, and deployment milestones."
       />
 
       {/* TRL progression bar */}
       <GlassCard className="mb-4 p-5">
         <div className="mb-3 flex items-center justify-between">
-          <div className="text-sm font-medium">Pipeline overview</div>
+          <div className="text-sm font-medium">TRL progression overview</div>
           <Badge tone="success">+3 this quarter</Badge>
         </div>
         <div className="flex items-center gap-1">
@@ -81,6 +81,20 @@ function Page() {
           ))}
         </div>
       </GlassCard>
+
+      <div className="mb-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
+        {[
+          ["Adopters", "312", "farmers, MSMEs, LGUs, and communities"],
+          ["Deployment Sites", "84", "pilot and active implementation sites"],
+          ["Commercial Partners", "19", "startup and industry transfer partners"],
+        ].map(([label, value, hint]) => (
+          <GlassCard key={label} className="p-5">
+            <div className="text-xs uppercase tracking-widest text-muted-foreground">{label}</div>
+            <div className="mt-2 text-3xl font-semibold text-gradient">{value}</div>
+            <div className="mt-1 text-xs text-muted-foreground">{hint}</div>
+          </GlassCard>
+        ))}
+      </div>
 
       {/* Kanban */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-5">

@@ -1,11 +1,11 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
-  Outlet,
+  HeadContent,
   Link,
+  Outlet,
+  Scripts,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
@@ -39,9 +39,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
@@ -72,18 +70,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CRCIT — Caraga Research Collaboration & Impact Tracker" },
+      { title: "Caraga R&D Intel Hub" },
       {
         name: "description",
         content:
-          "DOST Caraga's regional innovation intelligence platform — research repository, impact analytics, AI collaboration matcher, and tech transfer pipeline.",
+          "A regional research, development, monitoring, collaboration, and impact intelligence platform for Department of Science and Technology Caraga.",
       },
       { name: "author", content: "DOST Caraga" },
-      { property: "og:title", content: "CRCIT — Caraga Research Impact Tracker" },
+      { property: "og:title", content: "Caraga R&D Intel Hub" },
       {
         property: "og:description",
         content:
-          "Map the research-to-impact pipeline across Caraga: repositories, dashboards, AI matching, and tech transfer.",
+          "Map DOST Caraga research investments, deliverables, collaborations, technology transfer, and community impact.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -92,6 +90,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "icon",
+        href: "/favicon.ico",
+        type: "image/svg+xml",
       },
     ],
   }),

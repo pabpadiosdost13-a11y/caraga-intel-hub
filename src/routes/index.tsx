@@ -40,7 +40,7 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CRCIT — Caraga Research Collaboration & Impact Tracker" },
+      { title: "Caraga R&D Intel Hub" },
       {
         name: "description",
         content:
@@ -65,13 +65,9 @@ function Page() {
   return (
     <AppShell>
       <PageHeader
-        eyebrow="Regional Innovation Command Center"
-        title={
-          <>
-            <span className="text-gradient">Caraga Research</span> Intelligence
-          </>
-        }
-        description="A live view of DOST-funded research, real-world impact, and collaboration across the Caraga region."
+        eyebrow="Executive Intelligence Dashboard"
+        title="Dashboard & Analytics Center"
+        description="A Regional Research, Development, Monitoring, Collaboration, and Impact Intelligence Platform for Department of Science and Technology Caraga."
         actions={
           <>
             <button className="rounded-lg border border-border bg-card/60 px-3 py-2 text-sm hover:bg-card">

@@ -7,13 +7,15 @@ export const provinces = [
 ];
 
 export const sectors = [
-  "Agriculture & Aquaculture",
-  "Disaster Resilience",
-  "Health & Biotech",
-  "ICT & AI",
-  "Renewable Energy",
-  "Marine Science",
-  "MSME Innovation",
+  "Fisheries",
+  "Agriculture / Agroforestry",
+  "Mining",
+  "Ecotourism",
+  "Health",
+  "Disaster Risk Reduction",
+  "ICT",
+  "Manufacturing",
+  "Food Innovation",
 ];
 
 export const sdgs = [
@@ -42,6 +44,17 @@ export type Research = {
   citations: number;
   aiSummary: string;
   keywords: string[];
+  projectCode: string;
+  principalInvestigator: string;
+  collaborators: string[];
+  fundingSource: string;
+  duration: string;
+  startDate: string;
+  expectedCompletionDate: string;
+  actualCompletionDate?: string;
+  municipality: string;
+  barangays: number;
+  beneficiaries: number;
 };
 
 const titles = [
@@ -69,6 +82,7 @@ const titles = [
 
 export const researches: Research[] = titles.map((title, i) => ({
   id: `R-${1000 + i}`,
+  projectCode: `DOST-CAR-RD-${2020 + (i % 6)}-${String(i + 1).padStart(3, "0")}`,
   title,
   abstract:
     "This study examines a region-specific innovation pathway with focus on measurable community outcomes, technology transfer potential, and policy alignment with the Caraga Regional Development Plan.",
@@ -79,6 +93,18 @@ export const researches: Research[] = titles.map((title, i) => ({
     ["Dr. S. Villanueva"],
     ["Prof. K. Domingo", "Dr. L. Reyes"],
   ][i % 5],
+  principalInvestigator: [
+    "Dr. Maricel Bautista",
+    "Engr. Rolando Lim",
+    "Dr. Jasmine Carino",
+    "Prof. Aldous Sanchez",
+    "Dr. Patricia Tan",
+  ][i % 5],
+  collaborators: [
+    ["DOST Caraga", "LGU Butuan", "Caraga State University"],
+    ["DOST Caraga", "Surigao State CT", "MSME Cluster"],
+    ["DOST Caraga", "Provincial Agriculture Office", "Farmer Cooperatives"],
+  ][i % 3],
   institution: [
     "Caraga State University",
     "Surigao State College of Technology",
@@ -91,6 +117,14 @@ export const researches: Research[] = titles.map((title, i) => ({
   sdg: sdgs[i % sdgs.length],
   trl: ((i * 3) % 9) + 1,
   funding: 800_000 + ((i * 137) % 50) * 120_000,
+  fundingSource: ["DOST-GIA", "PCAARRD", "PCIEERD", "PCHRD"][i % 4],
+  duration: `${12 + (i % 4) * 6} months`,
+  startDate: `${2020 + (i % 5)}-${String((i % 9) + 1).padStart(2, "0")}-15`,
+  expectedCompletionDate: `${2021 + (i % 5)}-${String((i % 9) + 1).padStart(2, "0")}-15`,
+  actualCompletionDate: i % 4 === 1 ? `${2021 + (i % 5)}-${String((i % 9) + 2).padStart(2, "0")}-28` : undefined,
+  municipality: ["Butuan City", "Bayugan", "Surigao City", "Tandag", "San Jose"][i % 5],
+  barangays: 3 + (i % 8),
+  beneficiaries: 120 + i * 37,
   status: (["Active", "Completed", "Pilot", "Adopted"] as const)[i % 4],
   year: 2019 + (i % 6),
   citations: ((i * 17) % 90) + 3,
@@ -101,15 +135,50 @@ export const researches: Research[] = titles.map((title, i) => ({
   ),
 }));
 
+export const outputDeliverables = [
+  { type: "Publications", planned: 42, actual: 36, status: "On Track", due: "Q3 2026" },
+  { type: "Patents", planned: 14, actual: 9, status: "For Filing", due: "Q4 2026" },
+  { type: "Prototypes", planned: 28, actual: 22, status: "On Track", due: "Q2 2026" },
+  { type: "Developed Technologies", planned: 18, actual: 12, status: "Validation", due: "Q4 2026" },
+  { type: "Systems / Applications", planned: 16, actual: 11, status: "Pilot", due: "Q3 2026" },
+  { type: "Policy Recommendations", planned: 21, actual: 15, status: "Review", due: "Q1 2027" },
+];
+
+export const knowledgeProducts = [
+  "Technical reports",
+  "Policy briefs",
+  "Training manuals",
+  "Extension materials",
+  "Workshops conducted",
+];
+
+export const regionalIssues = [
+  { issue: "Fisheries productivity", aligned: 8, gap: "Cold-chain and post-harvest R&D" },
+  { issue: "Flood resilience", aligned: 11, gap: "Barangay-scale decision support" },
+  { issue: "Food security", aligned: 13, gap: "Climate-resilient crop varieties" },
+  { issue: "Agricultural modernization", aligned: 10, gap: "Affordable farm automation" },
+  { issue: "Waste management", aligned: 5, gap: "Circular economy pilots" },
+];
+
+export const beneficiaryMetrics = [
+  { label: "Farmers assisted", value: 4860 },
+  { label: "MSMEs supported", value: 214 },
+  { label: "LGUs engaged", value: 38 },
+  { label: "Communities reached", value: 126 },
+];
+
 export const kpis = {
   totalResearch: researches.length,
   totalFunding: researches.reduce((a, b) => a + b.funding, 0),
   activeProjects: researches.filter((r) => r.status === "Active").length,
+  ongoingProjects: researches.filter((r) => r.status === "Pilot").length,
   completed: researches.filter((r) => r.status === "Completed").length,
   publications: 184,
   citations: 2_417,
   patents: 23,
   commercialized: 11,
+  policiesInfluenced: 17,
+  communityAdoption: researches.filter((r) => r.status === "Adopted").length,
   lguAdoption: 38,
   msmeUtilization: 64,
   impactScore: 87,
@@ -147,6 +216,41 @@ export const trlPipeline = [
   { stage: "Pilot Testing", count: 17 },
   { stage: "Adoption", count: 11 },
   { stage: "Commercialized", count: 6 },
+];
+
+export const impactPerPeso = [
+  { year: "2020", value: 2.1, reach: 18 },
+  { year: "2021", value: 2.6, reach: 26 },
+  { year: "2022", value: 3.2, reach: 39 },
+  { year: "2023", value: 3.7, reach: 53 },
+  { year: "2024", value: 4.2, reach: 71 },
+  { year: "2025", value: 4.8, reach: 89 },
+];
+
+export const sectorImpact = sectors.map((s, i) => ({
+  sector: s
+    .replace("Agriculture & Aquaculture", "Agri/Aqua")
+    .replace("Disaster Resilience", "Resilience"),
+  projects: 9 + ((i * 5) % 18),
+  adoption: 34 + ((i * 9) % 47),
+  conversion: 28 + ((i * 7) % 44),
+}));
+
+export const adoptionTimeline = [
+  { quarter: "Q1 24", prototype: 18, pilot: 8, adopted: 3 },
+  { quarter: "Q2 24", prototype: 21, pilot: 12, adopted: 5 },
+  { quarter: "Q3 24", prototype: 24, pilot: 15, adopted: 8 },
+  { quarter: "Q4 24", prototype: 28, pilot: 17, adopted: 11 },
+  { quarter: "Q1 25", prototype: 32, pilot: 22, adopted: 15 },
+  { quarter: "Q2 25", prototype: 35, pilot: 27, adopted: 19 },
+];
+
+export const lifecycle = [
+  { stage: "Funded", count: 42, tone: "info" },
+  { stage: "Field Validation", count: 31, tone: "warning" },
+  { stage: "Pilot", count: 17, tone: "accent" },
+  { stage: "Adopted", count: 10, tone: "success" },
+  { stage: "Transferred", count: 6, tone: "destructive" },
 ];
 
 export const challenges = [
@@ -217,10 +321,16 @@ export const researchers = [
     id: "U-01",
     name: "Dr. Maricel Bautista",
     institution: "Caraga State University",
-    expertise: ["AI", "Hydrology", "Disaster"],
+    expertise: ["Hydrology", "Disaster Resilience", "Predictive Analytics"],
     hIndex: 18,
     publications: 42,
     score: 94,
+    province: "Agusan del Norte",
+    email: "mbautista@carsu.edu.ph",
+    contact: "+63 85 342 0001",
+    fundedProjects: 6,
+    interests: ["LGU flood systems", "open hydrology data"],
+    ongoingResearch: "River basin early warning operations",
   },
   {
     id: "U-02",
@@ -230,6 +340,12 @@ export const researchers = [
     hIndex: 12,
     publications: 28,
     score: 88,
+    province: "Surigao del Norte",
+    email: "rlim@ssct.edu.ph",
+    contact: "+63 86 231 1204",
+    fundedProjects: 4,
+    interests: ["farm automation", "sensor manufacturing"],
+    ongoingResearch: "Smart cacao fermentation monitoring",
   },
   {
     id: "U-03",
@@ -239,6 +355,12 @@ export const researchers = [
     hIndex: 15,
     publications: 33,
     score: 91,
+    province: "Agusan del Norte",
+    email: "jcarino@urios.edu.ph",
+    contact: "+63 85 815 3030",
+    fundedProjects: 5,
+    interests: ["public health deployments", "rural clinics"],
+    ongoingResearch: "Remote barangay telemedicine network",
   },
   {
     id: "U-04",
@@ -248,6 +370,12 @@ export const researchers = [
     hIndex: 10,
     publications: 21,
     score: 82,
+    province: "Surigao del Sur",
+    email: "asanchez@asscat.edu.ph",
+    contact: "+63 86 214 7788",
+    fundedProjects: 3,
+    interests: ["coastal livelihoods", "aquaculture pilots"],
+    ongoingResearch: "Tilapia and seaweed resilience trials",
   },
   {
     id: "U-05",
@@ -257,6 +385,12 @@ export const researchers = [
     hIndex: 14,
     publications: 30,
     score: 89,
+    province: "Agusan del Norte",
+    email: "ptan@carsu.edu.ph",
+    contact: "+63 85 341 4498",
+    fundedProjects: 4,
+    interests: ["energy policy", "technology licensing"],
+    ongoingResearch: "Solar dryers for upland processors",
   },
   {
     id: "U-06",
@@ -266,6 +400,12 @@ export const researchers = [
     hIndex: 9,
     publications: 19,
     score: 85,
+    province: "Surigao del Norte",
+    email: "dmercado@ssct.edu.ph",
+    contact: "+63 86 826 4412",
+    fundedProjects: 3,
+    interests: ["precision agriculture", "disaster mapping"],
+    ongoingResearch: "Drone-enabled crop disease detection",
   },
 ];
 

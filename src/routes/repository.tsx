@@ -13,7 +13,7 @@ import { Filter, Download, MapPin, Search } from "lucide-react";
 export const Route = createFileRoute("/repository")({
   head: () => ({
     meta: [
-      { title: "Research Repository — CRCIT" },
+      { title: "Research Repository - Caraga R&D Intel Hub" },
       {
         name: "description",
         content:
@@ -123,7 +123,9 @@ function Page() {
                 <thead className="border-b border-border bg-background/40 text-left text-xs uppercase tracking-wider text-muted-foreground">
                   <tr>
                     <th className="px-4 py-3">Title</th>
+                    <th className="px-4 py-3">Code</th>
                     <th className="px-4 py-3">Institution</th>
+                    <th className="px-4 py-3">PI</th>
                     <th className="px-4 py-3">Province</th>
                     <th className="px-4 py-3">TRL</th>
                     <th className="px-4 py-3">Funding</th>
@@ -139,7 +141,9 @@ function Page() {
                           {r.authors.join(", ")} · {r.year}
                         </div>
                       </td>
+                      <td className="px-4 py-3 text-muted-foreground">{r.projectCode}</td>
                       <td className="px-4 py-3 text-muted-foreground">{r.institution}</td>
+                      <td className="px-4 py-3 text-muted-foreground">{r.principalInvestigator}</td>
                       <td className="px-4 py-3">
                         <span className="inline-flex items-center gap-1 text-muted-foreground">
                           <MapPin className="h-3 w-3" /> {r.province}
@@ -181,6 +185,9 @@ function Page() {
                       {r.sector}
                     </div>
                     <div className="mt-1 font-semibold">{r.title}</div>
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      {r.projectCode} | {r.duration} | {r.startDate} to {r.expectedCompletionDate}
+                    </div>
                   </div>
                   <Badge tone="accent">{r.sdg.split("—")[0].trim()}</Badge>
                 </div>
@@ -189,7 +196,15 @@ function Page() {
                   <Badge tone="info">TRL {r.trl}</Badge>
                   <Badge>{r.province}</Badge>
                   <Badge tone="success">{formatPHP(r.funding)}</Badge>
+                  <Badge>{r.beneficiaries.toLocaleString()} beneficiaries</Badge>
                   <span className="ml-auto text-muted-foreground">{r.citations} cites</span>
+                </div>
+                <div className="mt-3 flex flex-wrap gap-1.5 text-xs text-muted-foreground">
+                  {r.collaborators.map((partner) => (
+                    <span key={partner} className="rounded-md border border-border bg-background/35 px-2 py-1">
+                      {partner}
+                    </span>
+                  ))}
                 </div>
               </GlassCard>
             ))}
